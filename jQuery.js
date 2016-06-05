@@ -1,8 +1,9 @@
 $(document).ready(function(){
-    var count = 16;
-    var length = 45;
-    var edge = 1;
-    createGrid(count,length,edge);
+    var numbox = 16;
+    var boxsize = 45;
+    var bordersize=0;
+    l = numbox*boxsize +((numbox)*2)*bordersize;
+    createGrid(numbox,boxsize,bordersize);
     makeButton();
     $(document).on("mouseenter",".box",function(){
         //could also use a "highlighted" class in css and use ".addClass()"
@@ -11,8 +12,10 @@ $(document).ready(function(){
     });
     $("button").on("click",function(){
         $("#container").remove();
-        //todo add prompt then figure out how to resize boxes smaller while keeping same amount of pixels
-        createGrid(count,length,edge);
+        //todo remove bordersize var
+        boxes = prompt("Enter number of boxes");
+        boxsize = (l-2*boxes)/(boxes);
+        createGrid(boxes,boxsize,bordersize);
     });
 });
 
@@ -23,7 +26,7 @@ function createGrid(numbox,boxsize,bordersize){
                         "width":length,
                     "border-style": "solid",
                     "border-color":"black",
-                    "border-width":bordersize,
+                    "border-width":"1px",
                     "margin":"auto",
                     "position":"relative",
                     "top":"30px"});
